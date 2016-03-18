@@ -158,7 +158,7 @@ EventBase::EventBase(bool enableTimeMeasurement)
     // call event_base_new().
     struct event ev;
     event_set(&ev, 0, 0, nullptr, nullptr);
-    // evb_ = (ev.ev_base) ? event_base_new() : event_init();
+    evb_ = (ev.ev_base) ? event_base_new() : (struct event_base *)event_init();
   }
   if (UNLIKELY(evb_ == nullptr)) {
     LOG(ERROR) << "EventBase(): Failed to init event base.";
